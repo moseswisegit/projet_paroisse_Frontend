@@ -9,17 +9,17 @@
                  <div>
                      <div class="row">
                          <div class="col-12 col-md-3">
-                             <CardsComponent :type="'Clientes'" :percentage="'12%'"  :icon="'fa-users'"  :qtd="'7590'"  />
+                             <CardsComponent :type="'Clientes'" :percentage="'12%'"  :icon="'fa-users'"  :qtd="clients.length"  />
                          </div>
                          <div class="col-12 col-md-3">
-                            <CardsComponent :type="'Produit'" :percentage="'82%'"  :icon="'fa-box'"  :qtd="'1390'"  />
+                            <CardsComponent :type="'Produit'" :percentage="'82%'"  :icon="'fa-box'"  :qtd="products.length"  />
 
                          </div>
                          <div class="col-12 col-md-3">
-                                <CardsComponent :type="'Vente'" :percentage="'72%'"  :icon="'fa-store'"  :qtd="'4190'"  />
+                                <CardsComponent :type="'Vente'" :percentage="'72%'"  :icon="'fa-store'"  :qtd="products.length"  />
                          </div>
                          <div class="col-12 col-md-3">
-                            <CardsComponent :type="'Relation'" :percentage="'92%'"  :icon="'fa-chart-bar'"  :qtd="'1090'"  />
+                            <CardsComponent :type="'Relation'" :percentage="'92%'"  :icon="'fa-chart-bar'"  :qtd="products.length"   />
                          </div>
                      </div>   
                  </div>
@@ -27,10 +27,10 @@
                  <div class="mt-5">
                         <div class="row">
                             <div class="col-12 col-md-6">
-                                <ListsComponent :data="clients" description="Clients" :columns ="['Nom','E-mail','telephone']" />
+                                <ListsComponent :data= "clients"  description="Clients" :columns ="['Nom','Email']"/> 
                             </div>
                              <div class="col-12 col-md-6">
-                                <ListsComponent :data= "products"  description="Products" :columns ="['Nom','value']"/>
+                                   <ListsComponent :data= "products"  description="Products" :columns ="['Nom','value']"/> 
                             </div>
                         </div>
                  </div>
@@ -50,26 +50,24 @@ export default {
     name : 'HomeComponent',
     data() {
         return {
-            clients:[],
-            products:[],
+            clients: [],
+            products: [],
         }
     },
     mounted() {
-        this.getUsers();
+        this.getData();
     },
     methods: {
-       async getUsers(){
+    
+    async getData(){
+        try{
             let response = await axios.get('/');
-            if(response.status == 200){
-             this.clients = response.data.clients;
-              this.products = response.data.products;
-            }else{
-                console.error("il y a erreur");
-            }
-            
-
-
-            }
+                this.clients = response.data.clients;
+                this.products = response.data.products;
+            }catch(error){
+            console.error("Erreur détectée :" + error.response.status);
+        }
+    }
     },
     components: {
         DashboardComponent,

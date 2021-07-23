@@ -18,7 +18,7 @@ export default {
    props:{
        type :String,
        percentage : String,
-       qtd : String,
+       qtd : Number,
        icon : String,
    }
 

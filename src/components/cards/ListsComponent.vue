@@ -11,15 +11,15 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">{{ columns[0] }}</th>
-      <th scope="col">E-mail</th>
-      <th scope="col">Telephone</th>
+      <th scope="col">{{ columns[1] }}</th>
+
     </tr>
   </thead>
   <tbody>
-    <tr v-for="user in data" :key="user.id">
-      <th scope="row"><p class="users">{{ user.id }}</p></th>
-      <td><p class="users">{{ user.name }}</p></td>
-      <td><p class="users">{{ user.email }}</p></td>
+    <tr v-for="item in data" :key="item.id">
+      <th scope="row"><p class="users">{{ item.id }}</p></th>
+      <td><p class="users">{{ item.name }}</p></td>
+      <td><p class="users">{{ (description == 'Clients') ? item.email : item.value}}</p></td>
     </tr>
   </tbody>
 </table>

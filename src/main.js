@@ -16,7 +16,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueRouter)
 
-axios.defaults.baseURL='http://localhost:8000/api/'
+axios.defaults.baseURL='http://localhost:8000/api/';
 
 const routes = [
   { path: '/', name: 'login' ,  component: LoginComponent },
